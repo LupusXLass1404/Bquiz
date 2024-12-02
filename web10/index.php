@@ -38,7 +38,20 @@
                 </div>
             </div>
             <?php
-				include('./front/main.php');
+				$do = $_GET['do'] ?? 'main';
+				$file="./front/{$do}.php";
+
+				if(!file_exists($file)) $file="./front/main.php";
+				
+				include $file;
+
+				// if (isset($_GET['page'])){
+				// 	if($_GET['page'] == 'news') include('./front/news.php');
+				// 	if($_GET['page'] == 'login') include('./front/login.php');
+				// 	if($_GET['page'] == 'main') include('./front/main.php');
+				// } else {
+				// 	include('./front/main.php');
+				// }
 			?>
             <div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
                 <!--右邊-->
