@@ -78,6 +78,7 @@
             </div>
             <?php
 				$do = $_GET['do'] ?? 'title';
+                $Do = ucfirst($do);
 				$file="./backend/{$do}.php";
 
 				if(!file_exists($file)) $file="./backend/title.php";
