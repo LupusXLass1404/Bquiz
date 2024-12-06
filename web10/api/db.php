@@ -154,7 +154,7 @@ class DB{
 
 function q($sql){
     $pdo=new PDO("mysql:host=localhost;charsrt=utf8;dbname=db10");
-    return $this->pdo->query($sql)->fetchAll();
+    return pdo->query($sql)->fetchAll();
 }
 
 function dd($array){
