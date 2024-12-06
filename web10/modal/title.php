@@ -1,6 +1,6 @@
 <h3 class="cent">新增標題區圖片</h3>
 <hr>
-<form action="api/insert_title.php" method="post" enctype="multipart/form-data">
+<form action="api/insert.php" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>標題區圖片：</td>
