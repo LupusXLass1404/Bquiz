@@ -1,17 +1,29 @@
+<?php include_once '../api/db.php';
+
+$rows=$Menu->all(['main_id'=>$_GET['id']]);
+
+?>
+
 <h3 class="cent">修改次選單</h3>
 <hr>
-<form action="api/insert.php" method="post" enctype="multipart/form-data">
+<form action="api/submenu.php" method="post" enctype="multipart/form-data">
     <table id="menu" style="margin: auto;">
         <tr>
-            <td>主選單名稱</td>
+            <td>次選單名稱</td>
             <td>選單網址連結</td>
             <td>刪除</td>
         </tr>
+        <?php
+            foreach($rows as $row){ 
+        ?>
         <tr>
-            <td><input type="twxt" name="text" id="text"></td>
-            <td><input type="text" name="href" id="href"></td>
-            <td><input type="checkbox" name="del[]"></td>
+            <td><input type="text" name="text" id="text" value="<?=$row['text']?>"></td>
+            <td><input type="text" name="href" id="href" value="<?=$row['href']?>"></td>
+            <td><input type="checkbox" name="del[]" value="<?=$row['id']?>"></td>
         </tr>
+        <?php
+        }
+        ?>
     </table>
     <div class="cent">
         <input type="submit" value="修改確定">
