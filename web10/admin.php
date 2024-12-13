@@ -48,11 +48,13 @@
                         <div class="mainmu">
                             校園映象資料管理 </div>
                     </a>
-                    <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
+                    <a style="color:#000; font-size:13px; text-decoration:none;"
+                        onclick="op('#cover','#cvr','./modal/total.php')">
                         <div class="mainmu">
                             進站總人數管理 </div>
                     </a>
-                    <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=bottom">
+                    <a style="color:#000; font-size:13px; text-decoration:none;"
+                        onclick="op('#cover','#cvr','./modal/bottom.php')">
                         <div class="mainmu">
                             頁尾版權資料管理 </div>
                     </a>
@@ -81,7 +83,7 @@
                 $Do = ucfirst($do);
 				$file="./backend/{$do}.php";
 
-				if(!file_exists($file)) $file="./backend/title.php";
+				if(!file_exists($file)) to("./admin.php?do=title");
 
 				include $file;
 			?>

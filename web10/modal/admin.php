@@ -4,7 +4,7 @@
     <table>
         <tr>
             <td>帳號：</td>
-            <td><input type="twxt" name="acc" id="acc"></td>
+            <td><input type="text" name="acc" id="acc"></td>
         </tr>
         <tr>
             <td>密碼：</td>
