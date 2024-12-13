@@ -1,6 +1,6 @@
 <?php 
     include_once "../api/db.php";
-    $total=$Total->find(1);
+    $total=$Total->find(1)['total'];
 ?>
 
 <h3 class="cent">進站總人數管理</h3>
@@ -9,7 +9,7 @@
     <table>
         <tr>
             <td>進站總人數：</td>
-            <td><input type="number" name="total" id="text" value="<?=$total['total'];?>"></td>
+            <td><input type="number" name="total" id="text" value="<?=$total;?>"></td>
         </tr>
     </table>
     <div class="cent">

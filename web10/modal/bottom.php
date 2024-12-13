@@ -1,6 +1,6 @@
 <?php 
     include_once "../api/db.php";
-    $bottom=$Bottom->find(1);
+    $bottom=$Bottom->find(1)['text'];
 ?>
 
 <h3 class="cent">頁尾版權資料管理</h3>
@@ -9,7 +9,7 @@
     <table>
         <tr>
             <td>頁尾版權資料：</td>
-            <td><input type="text" name="bottom" id="text" value="<?=$bottom['text'];?>"></td>
+            <td><input type="text" name="bottom" id="text" value="<?=$bottom;?>"></td>
         </tr>
     </table>
     <div class="cent">
