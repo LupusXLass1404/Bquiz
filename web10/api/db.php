@@ -1,5 +1,7 @@
 <?php
 
+
+session_start();
 class DB{
     protected $dsn="mysql:host=localhost;charsrt=utf8;dbname=db10";
     protected $pdo;
@@ -174,3 +176,10 @@ $Admin=new DB('admins');
 $Menu=new DB('menus');
 $Total=new DB('total');
 $Bottom=new DB('bottom');
+
+if(!isset($_SESSION['view'])){
+    echo "hi 歡迎第一次來訪";
+    $_SESSION['view']=1;
+}else{
+    echo "hi 歡迎再次來訪";
+}

@@ -6,8 +6,7 @@ if(isset($_SESSION['login'])){
 
 if(isset($_POST['acc'])){
 	if($_POST['acc']=='admin' && $_POST['ps']=='1234'){
-        session_start();
-		$_SESSION['login']=1;
+        $_SESSION['login']=1;
 		to("admin.php");
 	}else{
 		echo "<script>alert('帳號或密碼錯誤')</script>";
