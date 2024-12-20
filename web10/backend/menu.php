@@ -26,7 +26,7 @@
                         <td width="10%"></td>
                     </tr>
                     <?php
-                        $rows=$$Do->all();
+                        $rows=$$Do->all(['main_id'=>0]);
                         foreach($rows as $row){  
                     ?>
                     <tr>

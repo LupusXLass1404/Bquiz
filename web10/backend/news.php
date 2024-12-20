@@ -23,12 +23,18 @@
                         <td width="7%">刪除</td>
                     </tr>
                     <?php
-                        $rows=$$Do->all();
+                         $div=4;
+                         $total=$$Do->count();
+                         $pages=ceil($total/$div);
+                         $now=$_GET['p']??1;
+                         $start=($now-1)*$div;
+ 
+                         $rows=$$Do->all(" limit $start, $div");
                         foreach($rows as $row){  
                     ?>
                     <tr>
                         <td>
-                            <input type="text" name="text[]" id="" value="<?=$row['text'];?>">
+                            <textarea name="text[]" style="width:95%;height:60px;"><?=$row['text'];?></textarea>
                         </td>
                         <td>
                             <input type="checkbox" name="sh[]" value="<?=$row['id'];?>"
@@ -55,7 +61,26 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="cent">
+                <?php
+                    if(($now-1)>0){
+                        $prev=$now-1;
+                        echo "<a href='?do=$do&p=$prev'>&lt;</a>";
+                    }
+                    
+                    for($i=1; $i<=$pages; $i++){
+                        $size=($i==$now)?"24px":"16px";
+                        echo "<a href='?do=$do&p=$i' style='font-size: $size'>";
+                        echo $i;
+                        echo " </a>";
+                    }
 
+                    if(($now+1) <= $pages){
+                        $next=$now+1;
+                        echo "<a href='?do=$do&p=$next'>&gt;</a>";
+                    }
+                ?>
+            </div>
         </form>
     </div>
 </div>

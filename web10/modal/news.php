@@ -4,7 +4,7 @@
     <table>
         <tr>
             <td>最新消息資料：</td>
-            <td><input type="text" name="text" id="text"></td>
+            <td><textarea name="text" style="width:300px;height:100px;"></textarea></td>
         </tr>
     </table>
     <div class="cent">

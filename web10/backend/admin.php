@@ -1,3 +1,15 @@
+<?php include_once "api/db.php";
+
+seesion_start();
+if(!isset($_SESSION['login'])){
+    echo "請從登入頁面登入。";
+    exit();
+}
+
+?>
+
+
+
 <div class="di"
     style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
     <!--正中央-->
