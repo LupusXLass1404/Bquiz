@@ -1,46 +1,118 @@
-<div>
-    目前位置：首頁 > 分類網誌 > <span id="type">健康新知</span>
-</div>
-
 <style>
-.type,
-.list-item {
-    display: block;
-    margin: 10px 0;
+.detail {
+    background: rgba(51, 51, 51, 0.8);
+    color: #FFF;
+    height: 300px;
+    width: 400px;
+    position: absolute;
+    display: none;
+    left:10px;
+    top:10px;
+    z-index: 9999;
+    overflow: auto;
 }
 </style>
 
-<fieldset style="width: 150px; display: inline-block; vertical-align: top;">
-    <legend>分類網誌</legend>
-    <a class="type" data-type='1'>健康新知</a>
-    <a class="type" data-type='2'>菸害防治</a>
-    <a class="type" data-type='3'>癌症防治</a>
-    <a class="type" data-type='4'>慢性病防治</a>
-</fieldset>
+<fieldset>
+    <legend>目前位置：首頁 > 最新文章區 > <span id="type">健康新知</span></legend>
 
-<fieldset style="width: 500px; display: inline-block">
-    <legend>文章列表</legend>
-    <div id="postList"></div>
+    <table>
+        <tr>
+            <th width="30%">標題</th>
+            <th width="60%">內容</th>
+            <th width="10%"></th>
+        </tr>
+       
+        <?php
+            $total=$News->count();
+            $div=5;
+            $pages=ceil($total/$div);
+            $now=$_GET['p']??1;
+            $start=($now-1)*$div;
+
+            $rows=$News->all(['sh'=>1]," Limit $start,$div");
+            foreach($rows as $idx=> $row):
+        ?>
+         <tr>
+            <td class="row-title"><?=$row['title'];?></td>
+            <td style="position:relative;" class="row-content">
+                <span class='title'><?=mb_substr($row['news'],0,25);?>...</span>
+                <span class='detail'>
+                    <h2 style="color:skyblue"><?=$News::$type[$row['type']];?></h2>
+                    <?=nl2br($row['news']);?>
+                </span>
+            </td>
+            <td>
+                <?=$row['likes'];?>個人說
+                <img src="./icon/02B03.jpg" style="width:25px;">
+                <?php 
+                if(isset($_SESSION['user'])){
+                    $chk = $Log -> count(['news' => $row['id'], 'user'=>$_SESSION['user']]);
+                    $like = ($chk>0)?"收回讚":"讚";
+                    echo "<a href='#' data-id='{$row['id']}' class='like'>{$like}</a>";
+                };
+                ?>
+            </td>
+           
+        </tr>
+        <?php endforeach;?>
+
+    </table>
+    <div class="ct">
+        <?php 
+            if(($now-1)>0){
+                echo "<a href='?do=news&p=".($now-1)."'> &lt;</a>";
+            }
+
+            for($i=1;$i<=$pages;$i++){
+                $size=($i==$now)?"24px":"16px";
+                echo "<a href='?do=news&p=$i' style='font-size:$size'> $i </a>";
+            }
+
+            if(($now+1)<=$pages){
+                echo "<a href='?do=news&p=".($now+1)."'> &gt;</a>";
+            }
+        ?>
+    </div>
 </fieldset>
 
 <script>
-getList(1);
+    $(".like").on("click", function() {
+    let id = $(this).data('id');
+    let like = $(this).text();
 
-$(".type").on('click', function() {
-    // console.log($(this).text())
-    $('#type').text($(this).text());
+    $.post("./api/like.php", {id}, 
+        () => {
 
-    let type = $(this).data('type');
-    getList(type);
-})
+            switch (like) {
+                case "讚":
+                    $(this).text("收回讚");
+                    break;
+                case "收回讚":
+                    $(this).text("讚");
+                    break;
+            }
+            location.reload();
+        })
+    })
 
-function getList(type) {
-    
-    $("#postList").load("./api/get_list.php", {type});
-}
+    $(".row-title").hover(
+        function(){
+            $(this).next().children(".detail").show();
+        },
+        function(){
+            $(this).next().children(".detail").hide();
+        }
+    )
 
-function getPost(id) {
-    console.log(id);
-    $("#postList").load("./api/get_post.php", {id});
-}
+    $(".row-content").hover(
+        function(){
+            $(this).children(".detail").show();
+        },
+        function(){
+            $(this).children(".detail").hide();
+
+        }
+    )
+</script>
 </script>

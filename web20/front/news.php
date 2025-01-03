@@ -22,20 +22,21 @@
             <td><?=$row['title'];?></td>
             <td><?=mb_substr($row['news'],0,25);?>...</td>
             <td>
-                <?php if(isset($_SESSION['user'])){
-                    echo "<a href='#' data-id='{$row['id']}' class='like'>讚</a>";
-                };?>
+                <?php 
+                if(isset($_SESSION['user'])){
+                    $chk = $Log -> count(['news' => $row['id'], 'user'=>$_SESSION['user']]);
+                    $like = ($chk>0)?"收回讚":"讚";
+                    echo "<a href='#' data-id='{$row['id']}' class='like'>{$like}</a>";
+                };
+                ?>
             </td>
            
         </tr>
-
         <?php endforeach;?>
-
 
     </table>
     <div class="ct">
         <?php 
-
             if(($now-1)>0){
                 echo "<a href='?do=news&p=".($now-1)."'> &lt;</a>";
             }
@@ -45,11 +46,9 @@
                 echo "<a href='?do=news&p=$i' style='font-size:$size'> $i </a>";
             }
 
-
             if(($now+1)<=$pages){
                 echo "<a href='?do=news&p=".($now+1)."'> &gt;</a>";
             }
-
         ?>
     </div>
 </fieldset>
@@ -58,14 +57,16 @@
     $(".like").on("click", function(){
         let id = $(this).data('id');
         let like = $(this).text();
-        
-        switch(like){
-            case "讚":
-                $(this).text('收回讚');
-            break;
-            case "收回讚":
-                $(this).text('讚');
-            break;
-        }
+
+        $.post("./api/like.php", {id}, ()=>{
+            switch(like){
+                case "讚":
+                    $(this).text('收回讚');
+                break;
+                case "收回讚":
+                    $(this).text('讚');
+                break;
+            }
+        })
     })
 </script>
