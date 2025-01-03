@@ -11,7 +11,7 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" value="登入"><input type="reset" value="清除">
+                <input type="submit" value="登入" onclick="login()"><input type="reset" value="清除">
             </td>
             <td>
                 <a href="?do=forgot">忘記密碼</a>
@@ -20,3 +20,43 @@
         </tr>
     </table>
 </fieldset>
+
+<script>
+function login() {
+    let user = {
+        acc: $("#acc").val(),
+        pw: $("#pw").val(),
+    }
+
+
+    $.get("./api/chk_acc.php", {
+        acc: user.acc
+    }, (res) => {
+        if (parseInt(res) == 0) {
+            alert("查無帳號");
+            resetFrom();
+        } else {
+            $.post("./api/chk_pw.php", user, (res) => {
+                console.log(res);
+                if (parseInt(res) == 1) {
+                    if (user.acc == 'admin') {
+                        location.href = './admin.php';
+
+                    } else {
+                        location.href = './index.php';
+                    }
+                } else {
+                    alert("密碼錯誤");
+                    resetFrom();
+                }
+            })
+        }
+    })
+    // console.log(user)
+}
+
+function resetFrom() {
+    $("#acc").val('');
+    $("#pw").val('');
+}
+</script>

@@ -8,34 +8,24 @@
             <td><input type="text" name="email" id="email"></td>
         </tr>
         <tr>
-            <td id="pw"></td>
+            <td id="result"></td>
         </tr>
         <tr>
             <td>
-                <input type="button" value="尋找" onclick="findPw()">
+                <input type="button" value="尋找" onclick="forgot()">
             </td>
         </tr>
     </table>
 </fieldset>
 
 <script>
-function findPw() {
+function forgot() {
     let email = $('#email').val();
 
-    $.get("./api/forgot.php", {
-        'email': `${email}`
+    $.get("./api/chk_email.php", {
+        email
     }, (res) => {
-        console.log(email);
-        console.log(res);
-        console.log(JSON.parse(res));
-        // print_r(res);
-
-        // if () {
-        //     $('#pw').html(`您的密碼為`);
-        // } else {
-        //     $('#pw').html(`查無此資料`);
-        // }
+        $("#result").html(res);
     })
-
 }
 </script>

@@ -152,8 +152,8 @@ class DB{
 }
 
 function q($sql){
-    $pdo=new PDO("mysql:host=localhost;charsrt=utf8;dbname=db13");
-    return pdo->query($sql)->fetchAll();
+    $pdo=new PDO("mysql:host=localhost;charset=utf8;dbname=db20",'root','');
+    return $pdo->query($sql)->fetchAll();
 }
 
 function dd($array){
@@ -168,6 +168,8 @@ function to ($url){
 
 $Total=new DB('total');
 $User=new DB('user');
+$News=new DB('news');
+$Que=new DB('que');
 
 if(!isset($_SESSION['view'])){
     if($Total->count(['date'=>date("Y-m-d")])>0){
