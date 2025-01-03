@@ -24,6 +24,8 @@
 </fieldset>
 
 <script>
+getList(1);
+
 $(".type").on('click', function() {
     // console.log($(this).text())
     $('#type').text($(this).text());
@@ -33,10 +35,12 @@ $(".type").on('click', function() {
 })
 
 function getList(type) {
-    console.log(type);
+    
+    $("#postList").load("./api/get_list.php", {type});
+}
 
-    $("#postList").load("./api/get_list.php", {
-        type
-    });
+function getPost(id) {
+    console.log(id);
+    $("#postList").load("./api/get_post.php", {id});
 }
 </script>
