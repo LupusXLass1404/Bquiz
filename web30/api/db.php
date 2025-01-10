@@ -6,10 +6,16 @@ class DB{
     protected $dsn="mysql:host=localhost;charsrt=utf8;dbname=db30";
     protected $pdo;
     protected $table;
+    public static $level=[
+        1 => '普遍級',
+        2 => '保護級',
+        3 => '輔導級',
+        4 => '限制級'
+    ];
 
     function __construct($table){
+        $this->pdo=new PDO($this->dsn,'root',''); 
         $this->table=$table;
-        $this->pdo=new PDO($this->dsn,'root','');
     }
 
 
