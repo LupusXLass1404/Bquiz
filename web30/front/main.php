@@ -23,8 +23,21 @@
     align-items: center;
     justify-content: space-around;
   }
+
   .icons{
     width: 320px;
+    display: flex;
+    list-style: none;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .icons li{
+    width: 80px;
+    flex-shrink: 0;
+  }
+  .icons img{
+    width: 80%;
   }
 
   .poster{
@@ -76,9 +89,17 @@
         </div>
         <div class="controls">
           <div class="left"></div>
-          <div class="icons">
-            123
-          </div>
+          <ul class="icons">
+          <?php 
+            foreach($posters as $idx => $poster):
+          ?>
+          <li>
+              <img src="./upload/<?=$poster['img']?>" alt="">
+          </li>
+          <?php
+            endforeach;
+          ?>
+          </ul>
           <div class="right"></div>
         </div>
       </div>
