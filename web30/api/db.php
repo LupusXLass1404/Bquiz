@@ -169,13 +169,13 @@ function to ($url){
 $Poster=new DB('posters');
 $Movie=new DB('movies');
 
-if(!isset($_SESSION['view'])){
-    if($Total->count(['date'=>date("Y-m-d")])>0){
-        $total=$Total->find(['date'=>date("Y-m-d")]);
-        $total['total']++;
-        $Total->save($total);
-    } else {
-        $Total->save(['date'=>date("Y-m-d"), 'total'=>1]);
-    }
-    $_SESSION['view']=1;
-}
+// if(!isset($_SESSION['view'])){
+//     if($Total->count(['date'=>date("Y-m-d")])>0){
+//         $total=$Total->find(['date'=>date("Y-m-d")]);
+//         $total['total']++;
+//         $Total->save($total);
+//     } else {
+//         $Total->save(['date'=>date("Y-m-d"), 'total'=>1]);
+//     }
+//     $_SESSION['view']=1;
+// }
