@@ -35,6 +35,7 @@
   .icons li{
     width: 80px;
     flex-shrink: 0;
+    position: relative;
   }
   .icons img{
     width: 80%;
@@ -78,7 +79,7 @@
             $posters = $Poster -> all(['sh' => 1], "order by rank");
             foreach($posters as $idx => $poster):
           ?>
-          <div class="poster ct">
+          <div class="poster ct" data-ani="<?=$poster['ani'];?>">
               <img src="./upload/<?=$poster['img']?>" alt=""><br>
               <span><?=$poster['name']?></span>
           </div>
@@ -93,7 +94,7 @@
           <?php 
             foreach($posters as $idx => $poster):
           ?>
-          <li>
+          <li class="icon">
               <img src="./upload/<?=$poster['img']?>" alt="">
           </li>
           <?php
@@ -111,6 +112,55 @@
   function poster_show(i){
     $('.poster').eq(i).show();
   }
+
+  let slider=setInterval(() => {
+    sliders();
+  }, 2500);
+
+
+  function sliders(){
+    let now=$(".poster:visible").index();
+    let next=($(".poster").length==now+1)?0:now+1;
+    let ani=$(".poster").eq(next).data('ani');
+    //console.log(now,next)
+
+    let slider=setInterval(() => {
+      sliders();
+    }, 2500);
+
+    switch(ani){
+        case 1:
+            //淡入淡出
+            $(".poster").eq(now).fadeOut(1000,function(){
+                $(".poster").eq(next).fadeIn(1000);
+            });
+        break;
+        case 2:
+            //縮放
+            $(".poster").eq(now).hide(1000,function(){
+                $(".poster").eq(next).show(1000);
+            });
+        break;
+        case 3:
+        //滑入滑出
+            $(".poster").eq(now).slideUp(1000,function(){
+                $(".poster").eq(next).slideDown(1000);
+            });
+            
+        break;
+    }
+  }
+
+  let total = $(".icon").length;
+  let p = 0;
+  $(".left, .right").on("click", function(){
+    if($(this).hasClass('right')){
+      if((p + 1) <= (total - 4)) p++;
+    } else {
+      if(p - 1 >= 0) p--;
+    }
+    $(".icon").animate({right: 80 * p});
+  })
 </script>
 
 
