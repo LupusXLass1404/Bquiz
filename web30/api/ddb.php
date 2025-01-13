@@ -15,6 +15,28 @@ class DB{
         return $this -> fetchAll($spl);
     }
 
+    function save($array){
+        
+
+        if(isset($array['id'])){
+            // 修改
+            echo "id: $id";
+
+            $tmp = "";
+            foreach($keys as $key){
+                $tmp .= "`{$key}` => '{$array[$key]}', ";
+                echo $tmp . "<br>";
+            }
+            $sql = "Update Set ";
+
+        } else {
+            // 新增
+
+            $keys = array_keys($array);
+            
+        }
+    }
+
     protected function fetchOne($spl){
 
         return $this -> pdo -> query($spl) -> fetch(PDO::FETCH_ASSOC);
@@ -32,8 +54,18 @@ function dd($array){
     echo "</pre>";
 }
 
-$Movie = new DB('movies');
-dd($Movie -> all());
+$array = ['a' => 'aa', 'b' => 'bb'];
 
+// dd(array_keys($array));
+
+
+
+// echo join("-",$array);
+// dd($array);
+
+$Movie = new DB('movies');
+$Test = new DB('test');
+// dd();
+$Movie -> save($array)
 
 ?>

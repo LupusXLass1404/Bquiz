@@ -20,19 +20,7 @@
             <td width=20%>電影：</td>
             <td>
                 <select name="movie" id="movie">
-                <?php
-                $today = date("Y-m-d");
-                $ondate = date("Y-m-d", strtotime("-2 day"));
-
-                $rows = $Movie -> all(['sh' => 1], " AND ondate BETWEEN '$ondate' AND '$today' order by rank");
-                foreach($rows as $row):
-                ?>
-                <option value="<?=$row['id']?>" <?=$row['id'] == ($_GET['id'] ?? '') ? "selected" : "";?>><?=$row['name']?></option>
-
-                <?php
-                endforeach;
-                ?>
-
+                  
                 </select>            
             </td>
         </tr>
@@ -57,3 +45,44 @@
         </tr>
     </table>
 </form>
+
+<script>
+    getMovies();
+    let id = new URLSearchParams(location.href).get('id');
+
+    $('#movie').on("change", function(){
+        getDays();
+    })
+    $('#date').on("change", function(){
+        getSessions();
+    })
+
+    function getMovies(){
+        $.get("./api/get_movies.php", function(movies){
+            // console.log(movies);
+            $("#movie").html(movies);
+
+            if(parseInt(id) > 0){
+                $(`#movie option[value = '${id}']`).prop('selected', true);
+            }
+
+            getDays();
+        })
+    }
+
+    function getDays(){
+        $.get("./api/get_days.php", {'movie': $('#movie').val()}, function(days){
+            // console.log(days);
+            $('#date').html(days);
+
+            getSessions();
+        })
+    }
+
+    function getSessions(){
+        $.get("api/get_sessions.php", {'movie': $('#movie').val(), 'date': $('#date').val()}, function(sessions){
+            console.log(sessions);
+            $('#session').html(sessions);
+        })
+    }
+</script>
