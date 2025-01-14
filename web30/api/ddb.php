@@ -16,29 +16,37 @@ class DB{
     }
 
     function save($array){
-        
-
         if(isset($array['id'])){
             // 修改
-            echo "id: $id";
+            $id = $array['id'];
+            unset($array['id']);
 
-            $tmp = "";
-            foreach($keys as $key){
-                $tmp .= "`{$key}` => '{$array[$key]}', ";
-                echo $tmp . "<br>";
-            }
-            $sql = "Update Set ";
+            $set = $this -> a2s($array);
 
+            $sql = "Update `{$this -> table}` Set" . join(", ", $set) . " Where `id` = '{$id}'";
         } else {
             // 新增
-
             $keys = array_keys($array);
-            
+
+            $sql = "Insert Into `{$this -> table}` (`" . join("`, `", $keys) . "`) Values('" . join("', '", $array) ."') ";
         }
+        // return $sql;
+        return $this -> pdo -> exec($sql);
+    }
+
+    function del(){
+
+    }
+
+    function a2s($array){
+        $tmp = [];
+        foreach($array as $key => $value){
+            $tmp[] = "`{$key}` = '{$value}'";
+        }
+        return $tmp;
     }
 
     protected function fetchOne($spl){
-
         return $this -> pdo -> query($spl) -> fetch(PDO::FETCH_ASSOC);
     }
 
@@ -54,7 +62,7 @@ function dd($array){
     echo "</pre>";
 }
 
-$array = ['a' => 'aa', 'b' => 'bb'];
+$array = ['text' => '你不好', 'id' => '1'];
 
 // dd(array_keys($array));
 
@@ -66,6 +74,6 @@ $array = ['a' => 'aa', 'b' => 'bb'];
 $Movie = new DB('movies');
 $Test = new DB('test');
 // dd();
-$Movie -> save($array)
+echo $Test -> save($array)
 
 ?>
