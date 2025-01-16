@@ -14,11 +14,11 @@ class DB{
         4 => '限制級'
     ];
 
+
     function __construct($table){
         $this->pdo=new PDO($this->dsn,'root',''); 
         $this->table=$table;
     }
-
 
     /**
      * 撈出全部資料
@@ -175,6 +175,7 @@ function to ($url){
 
 $Poster=new DB('posters');
 $Movie=new DB('movies');
+$Order=new DB('orders');
 
 // if(!isset($_SESSION['view'])){
 //     if($Total->count(['date'=>date("Y-m-d")])>0){
