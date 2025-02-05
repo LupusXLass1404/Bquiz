@@ -1,4 +1,5 @@
 <?php include_once "./api/db.php";?>
+
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0040)http://127.0.0.1/test/exercise/collage/? -->
@@ -37,6 +38,13 @@
 						1 </span>
 				</div>
 			</div>
+			<?php
+				$do = $_GET['do'] ?? 'main';
+				$file = "./front/{$do}.php";
+				if(!file_exists($file)) $do = 'main';
+
+				include("./front/{$do}.php")
+			?>
 			<!-- 123123123123 -->
 
 			<div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
