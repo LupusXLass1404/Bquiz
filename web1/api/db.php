@@ -18,7 +18,7 @@ class DB{
                 $sql .= " Where " . join(" && ", $where);
             } else {
                 // 單個數
-                $sql .= " Where `id` = '{$arg[0]}' ";
+                $sql .= $arg[0];
             }
         }
 
