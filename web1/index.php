@@ -25,7 +25,10 @@
 	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
 		<a title="" href="./home_files/home.htm">
-			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div><!--標題-->
+			<?php
+				$row = $Title -> find(['sh'=>1]);
+			?>
+			<div class="ti" style="background:url(&#39;./upload/<?=$row['img'];?>&#39;); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
