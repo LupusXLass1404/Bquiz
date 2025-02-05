@@ -8,7 +8,11 @@ foreach($_POST['id'] as $idx => $id){
         $$db -> del($id);
     } else {
         $row['id'] = $id;
-        $row['text'] = $_POST['text'][$idx];
+
+        if(isset($_POST['text'])){
+            $row['text'] = $_POST['text'][$idx];
+        }
+        
         $row['sh'] = isset($_POST['sh']) && in_array($id, $_POST['sh']) ? 1 : 0;
     
         $$db -> save($row);
