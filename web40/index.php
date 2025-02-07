@@ -23,8 +23,20 @@
             <a href="?do=news">最新消息</a> |
             <a href="?do=look">購物流程</a> |
             <a href="?do=buycart">購物車</a> |
-            <a href="?do=login">會員登入</a> |
-            <a href="?do=admin">管理登入</a>
+            <?php
+                if(empty($_SESSION['Mem'])){
+                    echo '<a href="?do=login">會員登入</a>';
+                } else {
+                    echo '<a href="./api/logout.php?table=Mem">登出</a>';    
+                }
+            ?> |
+            <?php
+                if(empty($_SESSION['Admin'])){
+                    echo '<a href="?do=admin">管理登入</a>';
+                } else {
+                    echo '<a href="./admin.php">返回管理</a>';    
+                }
+            ?>
             <br>
         </div>
         <div id="left" class="ct">
