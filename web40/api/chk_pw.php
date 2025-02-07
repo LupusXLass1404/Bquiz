@@ -1,10 +1,12 @@
 <?php include_once "./db.php";
+$table = $_POST['table'];
+unset($_POST['table']);
 
-$chk = $Mem -> count($_POST);
+$chk = $$table -> count($_POST);
 
 if($chk){
     echo 1;
-    $_SESSION['login'] = $_POST['acc'];
+    $_SESSION[$table] = $_POST['acc'];
 } else {
     echo 0;
 }

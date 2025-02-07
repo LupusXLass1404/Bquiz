@@ -34,7 +34,7 @@
 		</div>
 		<div id="right">
 			<?php
-				$do = $_GET['do'] ?? 'admin';
+				$do = $_GET['do'] ?? 'main';
 				$file = "./back/{$do}.php";
 
 				if(file_exists($file)){

@@ -2,6 +2,7 @@
 <a href="?do=reg">
     <img src="./icon/0413.jpg" alt="">
 </a>
+
 <h2>會員登入</h2>
 <table class="all">
     <tr>
@@ -43,7 +44,8 @@
             if(parseInt(res)){
                 $.post('./api/chk_pw.php', {
                     acc: $('#acc').val(),
-                    pw: $('#pw').val()
+                    pw: $('#pw').val(),
+                    table: "Mem"
                 }, function(res){
                     if(parseInt(res)){
                         location.href = './index.php';
@@ -52,7 +54,7 @@
                     }
                 })
             } else {
-                alert('驗證碼錯誤，情重新輸入。');
+                alert('對不起，您輸入的驗證碼有誤請您重新登入。');
             }
         })
     }
