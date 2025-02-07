@@ -61,7 +61,7 @@ class DB{
 
             $sql = "Insert Into `{$this->table}`(`" . join("`, `", $keys) . "`) Values ('" . join("', '", $array) . "')";
         }
-        // echo $sql;
+        echo $sql;
         return $this -> pdo -> exec($sql);
     }
 
@@ -142,7 +142,7 @@ function dd($array){
     echo "</pre>";
 }
 
-
+$Mem = new DB('members');
 
 
 ?>
