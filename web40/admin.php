@@ -40,7 +40,7 @@
 				if(file_exists($file)){
 					include $file;
 				} else {
-					include "./back/main.php";
+					include "./back/maing.php";
 				}
 			?>
 		</div>
