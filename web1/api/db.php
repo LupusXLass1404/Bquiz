@@ -1,4 +1,7 @@
 <?php
+date_default_timezone_set("Asia/Taipei");
+session_start();
+
 class DB{
     protected $dbn = "mysql:host=localhost;charset=utf8;dbname=db01";
     protected $pdo;
@@ -25,7 +28,7 @@ class DB{
         if(!empty($arg[1])){
             $sql .= $arg[1];
         }
-        // return $sql;
+        // echo $sql;
         return $this -> fetchAll($sql);
     }
     function find($id){
@@ -95,7 +98,7 @@ class DB{
             $tmp = $this -> a2s($where);
             $sql .= "Where " . join(" && ", $tmp);
         }
-        // return $sql;
+        // echo $sql;
         return $this -> pdo -> query($sql) -> fetchColumn();
     }
 
@@ -146,5 +149,12 @@ $Bottom = new DB('bottom');
 $News = new DB('news');
 $Admin = new DB('admin');
 $Menu = new DB('menu');
+
+if(!isset($_SESSION['view'])){
+    $row = $Total -> find(1);
+    $row['total']++;
+    $Total -> save($row);
+    $_SESSION['view'] = 1;
+}
 
 ?>
