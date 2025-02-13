@@ -61,7 +61,7 @@ class DB{
 
             $sql = "Insert Into `{$this->table}`(`" . join("`, `", $keys) . "`) Values ('" . join("', '", $array) . "')";
         }
-        echo $sql;
+        // echo $sql;
         return $this -> pdo -> exec($sql);
     }
 
@@ -144,6 +144,7 @@ function dd($array){
 
 $Mem = new DB('members');
 $Admin = new DB('admin');
+$Bot = new DB('bottom');
 
 
 ?>
