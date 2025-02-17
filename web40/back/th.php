@@ -17,7 +17,7 @@
     <?php
         $rows = $Type -> all(['big_id'=>0]);
         foreach($rows as $row):
-        // 大分類開頭
+        // ========================大分類開頭========================
     ?>
     <tr class="tt">
         <td><?=$row['name'];?></td>
@@ -45,7 +45,7 @@
     ?>
 
     <?php
-        // 大分類結尾
+        // ========================大分類結尾========================
         endforeach;
     ?>
 
@@ -103,12 +103,7 @@
 
 <h2 class="ct">商品管理</h2>
 <div class="ct">
-    <button>新增商品</button>
-</div>
-<div class="ct">
-    <select name="selbig" id="selbig">
-
-    </select>
+    <button onclick="lof('?do=item_add')">新增商品</button>
 </div>
 <table class="all">
     <tr class="tt ct">
@@ -118,16 +113,34 @@
         <td>狀態</td>
         <td width=25%>操作</td>
     </tr>
+    <?php
+        $rows = $Item -> all();
+        foreach($rows as $row):
+    ?>
     <tr class="pp">
-        <td class="ct">05</td>
-        <td>造反</td>
-        <td class="ct">優雅</td>
-        <td class="ct">時尚</td>
+        <td class="ct"><?=$row['no'];?></td>
+        <td><?=$row['name'];?></td>
+        <td class="ct"><?=$row['stock'];?></td>
+        <td class="ct"><?=$row['sh']==1?"販售中":"已下架";?></td>
         <td class="ct">
-            <button>修改</button>
-            <button>刪除</button>
-            <button>上架</button>
-            <button>下架</button>
+            <button onclick="lof('?do=item_edit&id=<?=$row['id'];?>')">修改</button>
+            <button onclick="del('Item', <?=$row['id'];?>)">刪除</button>
+            <!-- 如果用 location.reload() 就不用this -->
+            <button onclick="sh(<?=$row['id'];?>, 1, this)">上架</button>
+            <button onclick="sh(<?=$row['id'];?>, 0, this)">下架</button>
         </td>
     </tr>
+    <?php
+        endforeach;
+    ?>
 </table>
+
+<script>
+    function sh(id, sh, dom){
+        // 如果用 location.reload() 就不用dom
+        $.post("./api/sh.php", {id, sh}, function(){
+            // location.reload();
+            $(dom).parent().prev().text((sh)?'販售中':'已下架');
+        })
+    }
+</script>

@@ -146,6 +146,6 @@ $Mem = new DB('members');
 $Admin = new DB('admin');
 $Bot = new DB('bottom');
 $Type = new DB('types');
-
+$Item = new DB('items');
 
 ?>

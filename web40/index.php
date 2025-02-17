@@ -41,6 +41,28 @@
         </div>
         <div id="left" class="ct">
             <div style="min-height:400px;">
+                <div>
+                    <a href='?type=0'>全部商品（<?=$Item->count(['sh'=>1]);?>）</a>
+                </div>
+                <?php
+                $rows = $Type -> all(['big_id' => 0]);
+                foreach($rows as $row){
+                    echo "<div class='ww'>";
+                    echo    "<a href='?type={$row['id']}'>";
+                    echo    $row['name'] . "（". $Item->count(['big'=>$row['id'], 'sh'=>1]) ."）";
+                    echo    "</a>";
+                    
+                    $rows = $Type -> all(['big_id' => $row['id']]);
+                    echo    "<div class='s'>";
+                    foreach($rows as $row){
+                        echo "<a href='?type={$row['id']}' style='background-color:rgb(206, 99, 28); color:#fff;'>";
+                        echo $row['name']. "（". $Item->count(['mid'=>$row['id'], 'sh'=>1]) ."）";
+                        echo "</a>";
+                    }
+                    echo    "</div>";
+                    echo "</div>";
+                }
+                ?>
             </div>
             <span>
                 <div>進站總人數</div>

@@ -42,7 +42,7 @@ class DB{
         } else {
             $sql .= " Where `id` = '{$id}'";
         }
-
+        // echo $sql;
         return $this -> fetch_one($sql);
     }
 
@@ -61,7 +61,7 @@ class DB{
 
             $sql ="Insert into `{$this -> table}`(`".join("`, `", $key)."`) Values('".join("', '", $array)."')";
         }
-        echo $sql;
+        // echo $sql;
         return $this -> pdo -> exec($sql);
     }
     
@@ -114,17 +114,31 @@ class DB{
     
 }
 
-function db($array){
+function q($sql){
+    $dbn = "mysql:host=localhost;charset=utf8;dbname=test";
+    $pdo = new PDO($dbn, 'root', '');
+    return $pdo -> query($sql) -> fetchAll();
+}
+
+function dd($array){
     echo "<pre>";
     print_r($array);
     echo "</pre>";
 }
 
-$Test = new DB('tests');
+function to($url){
+    header("location:". $url);
+}
+
+// $Test = new DB('tests');
 
 // $data = ['text'=>'你', 'id'=> 11];
 
 // $Test -> save($data);
 // $Test -> del(1);
+// $rows = $Test -> all(['text'=> "你"], " limit 3");
+// $rows = q("SELECT * FROM `tests` WHERE 1");
+// dd($rows);
 
+// to('../web1')
 ?>

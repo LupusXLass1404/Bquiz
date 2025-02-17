@@ -144,6 +144,7 @@ function to($url){
 $Test = new DB('tests');
 
 // $data = ["text"=>"你saddsadsa好", "sh"=>4];
+// $data = ["text"=>"你saddsadsa好", "sh"=>4, 'id'=>5];
 // $Test -> save($data);
 // $Test -> del($data);
 // $rows = $Test -> find(3);
