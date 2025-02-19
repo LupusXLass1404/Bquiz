@@ -6,7 +6,11 @@ $pw = $_POST['pw'] ?? "";
 if ($User -> count(["acc"=>$acc])){
     if ($User -> count(["pw"=>$pw])){
         $_SESSION['login'] = $acc;
-        echo "login";
+        if($acc=="admin"){
+            echo "admin";
+        } else {
+            echo "login";
+        }
     } else {
         echo "pw";
     }

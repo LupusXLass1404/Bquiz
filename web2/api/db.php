@@ -151,5 +151,19 @@ $User = new DB('user');
 $News = new DB('news');
 $Que = new DB('que');
 $Good = new DB('good');
+$View = new DB('view');
+
+if(!isset($_SESSION['view'])){
+    $date = date("Y-m-d");
+    if($View -> count(['date'=>$date])){
+        $row = $View -> find(['date'=>$date]);
+        $row['view']++;
+
+        $View -> save($row);
+    } else {
+        $View -> save(['date'=>$date, 'view'=>1]);
+    } 
+    $_SESSION['view']=1;
+}
 
 ?>
