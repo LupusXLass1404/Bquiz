@@ -56,6 +56,25 @@
     總價：<?=$total;?>
 </div>
 <div class="ct">
-    <button>確定送出</button>
+    <button onclick="checkout()">確定送出</button>
     <button onclick="location.href='?do=buycart'">返回修改訂單</button>
 </div>
+
+<script>
+    function checkout(){   
+        let data = {
+            name: $('#name').val(),
+            email: $('#email').val(),
+            addr: $('#addr').val(),
+            tel: $('#name').val(),
+            total:<?=$total;?>
+        }    
+
+        $.post('./api/checkout.php', data, function(res){
+            console.log(res);
+            
+            alert('訂購成功\n感謝您的選購');
+            location.href='./index.php';
+        })
+    }
+</script>

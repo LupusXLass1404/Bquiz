@@ -19,6 +19,13 @@ class DB{
 
     function find($id){
         $sql = "Select * From `$this->table` ";
+
+        if(is_array($id)){
+            $tmp = $this -> a2s($id);
+            
+        } else {
+
+        }
     }
 
     function save($array){
