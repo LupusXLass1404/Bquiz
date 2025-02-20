@@ -1,5 +1,5 @@
 <?php include_once "./db.php";
-dd($_POST);
+// dd($_POST);
 $main = $_POST['text'];
 $Que -> save(['text'=>$main]);
 $row = $Que -> find(['text'=>$_POST['text']]);

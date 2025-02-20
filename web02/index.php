@@ -21,7 +21,7 @@
 	<iframe name="back" style="display:none;"></iframe>
 	<div id="all">
 		<div id="title">
-			00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36
+			<?=date("m 月 d 號 l");?> | 今日瀏覽: <?=$View->find(['date'=>$date])['view'];?> | 累積瀏覽: <?=$View->sum('view');?>
 			<a href="./index.php" style="float: right;">回首頁</a>
 		</div>
 		<div id="title2">
@@ -46,6 +46,13 @@
 					</span>
 					<div class="">
 						<?php
+							$do = $_GET??'main';
+							$file = "./front/{$do}.php";
+
+							if(!file_exists($file)) $do = "main";
+							$db = ucfirst($do);
+
+							include "./front/{$do}.php";
 						?>
 					</div>
 				</div>

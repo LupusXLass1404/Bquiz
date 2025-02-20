@@ -14,7 +14,22 @@ class DB{
 
     function all(...$arg){
         $sql = "Select * From `$this->table` ";
-        
+
+        if(!empty($arg[0])){
+            if(is_array($arg[0])){
+                $tmp = $this -> a2s($arg[0]);
+                
+                $sql .= " Where " . join(" && ", $tmp);
+            } else {
+                $sql .= $arg[0];
+            }
+        }
+
+        if(!empty($arg[1])){
+            $sql .= $arg[1];
+        }
+        echo $sql;
+        return $this -> fetch_all($sql);
     }
 
     function find($id){
@@ -23,9 +38,12 @@ class DB{
         if(is_array($id)){
             $tmp = $this -> a2s($id);
             
+            $sql .= "Where " . join(" && ", $tmp);
         } else {
-
+            $sql .= "Where `id` = '$id'";
         }
+        // echo $sql;
+        return $this -> fetch_one($sql);
     }
 
     function save($array){
@@ -41,29 +59,48 @@ class DB{
 
             $sql = "Insert into `$this->table`(`".join("`, `", $key)."`) Values ('".join("', '", $array)."')";
         }
-        echo $sql;
+        // echo $sql;
         return $this -> pdo -> exec($sql);
     }
 
     function del($id){
-        
+        $sql = "Delete From `$this->table` ";
+
+        if(is_array($id)){
+            $tmp = $this -> a2s($id);
+            
+            $sql .= "Where " . join(" && ", $tmp);
+        } else {
+            $sql .= "Where `id` = '$id'";
+        }
+        // echo $sql;
         return $this -> pdo -> exec($sql);
     }
 
     function count($where = []){
-        $this->math('count', "*", $where);
+        return $this->math('count', "*", $where);
     }
     function sum($col, $where = []){
-        $this->math('sum', $col, $where);
+        return $this->math('sum', $col, $where);
     }
 
     protected function math($math, $col = "*", $where = []){
-        $sql = "Select * From `$this->table` "
+        $sql = "Select $math($col) From `$this->table` ";
 
+        if(!empty($where)){
+            $tmp = $this -> a2s($where);
+            
+            $sql .= "Where " . join(" && ", $tmp);
+        }
+        // echo $sql;
+        return $this -> pdo -> query($sql) -> fetchColumn();
     }
 
-    function fetch_one($sql){
-
+    protected function fetch_one($sql){
+        return $this -> pdo -> query($sql) -> fetch(PDO::FETCH_ASSOC);
+    }
+    protected function fetch_all($sql){
+        return $this -> pdo -> query($sql) -> fetchAll(PDO::FETCH_ASSOC);
     }
 
     function a2s($array){
@@ -77,10 +114,6 @@ class DB{
     }
 }
 
-function q($sql){
-
-}
-
 function dd($array){
     echo "<pre>";
     print_r($array);
@@ -91,11 +124,27 @@ function to($url){
     header("location:" . $url);
 }
 
-$Test = new DB('test');
-$data = [
-    'text'=> '抄怪fDdsfdsfds好',
-    'sh'=>5,
-    'id'=>9
-];
+$User = new DB('user');
+$News = new DB('news');
+$Que = new DB('que');
+$Good = new DB('good');
+$View = new DB('view');
+$date = date("Y-m-d");
+if(!isset($_SESSION['view'])){
+    if($View -> count(['date'=>$date])){
+        $row = $View -> find(['date'=>$date]);
+        $row['view']++;
 
-$Test->save($data);
+        $View -> save($row);
+    } else {
+        $View -> save(['date'=>$date, 'view'=>1]);
+    }
+    $_SESSION['view'] = 1;
+}
+
+
+
+
+
+
+							
