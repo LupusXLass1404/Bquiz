@@ -28,7 +28,7 @@ class DB{
         if(!empty($arg[1])){
             $sql .= $arg[1];
         }
-        echo $sql;
+        // echo $sql;
         return $this -> fetch_all($sql);
     }
 
@@ -129,7 +129,9 @@ $News = new DB('news');
 $Que = new DB('que');
 $Good = new DB('good');
 $View = new DB('view');
+
 $date = date("Y-m-d");
+
 if(!isset($_SESSION['view'])){
     if($View -> count(['date'=>$date])){
         $row = $View -> find(['date'=>$date]);

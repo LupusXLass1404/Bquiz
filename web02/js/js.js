@@ -4,5 +4,29 @@ function lo(th, url) {
 }
 
 function lof(url) {
-	location.replace(url);
+	location.href(url);
+}
+
+function del(table) {
+	let dels = $('input[name="del[]"]:checked');
+	let ids = [];
+
+	dels.each((idx, e) => {
+		ids.push($(e).val());
+	});
+
+	$.post(`./api/del.php?do=${table}`, { ids: ids }, function (res) {
+		location.reload();
+	})
+}
+
+function resetChk() {
+	$("input[type='checkbox']").prop("checked", false);
+}
+
+function resetReg() {
+	$("#acc").val("");
+	$("#pw").val("");
+	$("#pw2").val("");
+	$("#email").val("");
 }
