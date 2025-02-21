@@ -1,29 +1,5 @@
 <fieldset class="tab aut">
-    <legend>帳號管理</legend>
-    <form action="./api/edit.php?do=<?=$do;?>" method="post">
-        <table class="tab aut ct">
-            <tr class="clo">
-                <td>帳號</td>
-                <td>密碼</td>
-                <td>刪除</td>
-            </tr>
-            <?php foreach($$db->all() as $row): ?>
-            <tr>
-                <td><?=$row['acc'];?></td>
-                <td><?=  str_repeat("*", strlen($row['pw'])) ;?></td>
-                <td>
-                    <input type="checkbox" name="del[]" value="<?=$row['id'];?>">
-                </td>
-                <input type="hidden" name="id[]" value="<?=$row['id'];?>">
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <div class="ct">
-            <input type="submit" value="確認刪除">
-            <input type="reset" value="清空選取">
-        </div>
-    </form>      
-    <h2>新增會員</h2>
+    <legend>會員註冊</legend>
     <span style="color: red;">* 請設定您要註冊的帳號及密碼（最長12個字元）</span>
     <table>
         <tr>
@@ -44,7 +20,7 @@
         </tr>
     </table>
     <div>
-        <button onclick="reg()">新增</button>
+        <button onclick="reg()">註冊</button>
         <button onclick="resetForm()">清除</button>
     </div>
 </fieldset>
@@ -64,8 +40,8 @@
 				if(res){
 					alert('帳號重複');
 				} else {
-					alert('新增成功');
-					location.reload();
+					alert('註冊成功');
+					lof('?do=login');
 				}
 			})
 		} else {

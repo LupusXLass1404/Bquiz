@@ -4,5 +4,5 @@ if($User -> count($_POST)){
     $pw = $User -> find($_POST)['pw'];
     echo "您的密碼為：".$pw;
 } else {
-    echo "查無此資料"
+    echo "查無此資料";
 }

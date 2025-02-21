@@ -4,7 +4,7 @@ function lo(th, url) {
 }
 
 function lof(url) {
-	location.href(url);
+	location.href = url;
 }
 
 function del(table) {
@@ -24,7 +24,7 @@ function resetChk() {
 	$("input[type='checkbox']").prop("checked", false);
 }
 
-function resetReg() {
+function resetForm() {
 	$("#acc").val("");
 	$("#pw").val("");
 	$("#pw2").val("");

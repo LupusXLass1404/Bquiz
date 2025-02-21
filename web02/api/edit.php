@@ -3,7 +3,7 @@ dd($_POST);
 $db = ucfirst($_GET['do']);
 
 foreach($_POST['id'] as $idx => $id){
-    if(in_array($id, $_POST['del'])){
+    if(isset($_POST['del']) && in_array($id, $_POST['del'])){
         $$db -> del($id);
     } else {
         $row = $$db -> find($id);
