@@ -6,6 +6,12 @@ class DB{
     protected $dbn = "mysql:host=localhost;charset=utf8;dbname=db03";
     protected $pdo;
     protected $table;
+    public static $rating = [
+        '1' => '普遍級',
+        '2' => '保護級',
+        '3' => '輔導級',
+        '4' => '限制級'
+    ];
 
     function __construct($table){
         $this -> pdo = new PDO($this -> dbn, 'root', '');
@@ -142,5 +148,6 @@ function to($url){
 }
 
 $Trailer = new DB("trailer");
+$Movie = new DB("movie");
 
 ?>

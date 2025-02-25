@@ -40,16 +40,16 @@
                 endforeach; 
             ?>
         </table>
-    </form>
-   
-</div>
-<div class="ct tab">
-    <input type="submit" value="編輯確定">
-    <input type="reset" value="重置">
-</div>
+    </div>
+    <div class="ct tab">
+        <input type="submit" value="編輯確定">
+        <input type="reset" value="重置">
+    </div>
+</form>
 <script>
     function rank(id, sw){
-        $.post("./api/sw.php?db=Trailer", {id, sw}, function(res){    
+        $.post("./api/sw.php?db=Trailer", {id, sw}, function(res){  
+            console.log(res);
             location.reload();
         })
     }

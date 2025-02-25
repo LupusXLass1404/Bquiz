@@ -10,7 +10,6 @@ if(!empty($_FILES['img']['name'])){
 }
 
 $_POST['rank'] = $$db -> max("id")+1;
-dd($_POST);
 
 $$db -> save($_POST);
 

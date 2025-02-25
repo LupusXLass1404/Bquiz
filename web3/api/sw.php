@@ -6,8 +6,8 @@ dd($_POST);
 $now = $$db -> find(['id'=>$_POST['id']]);
 $sw = $$db -> find(['rank'=>$_POST['sw']]);
 
+$sw['rank'] = $now['rank'];
 $now['rank'] = $_POST['sw'];
-$sw['rank'] = $_POST['id'];
 
 dd($now);
 dd($sw);
