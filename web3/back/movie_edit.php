@@ -2,6 +2,7 @@
     $row = $Movie -> find($_GET['id']);
     list($year, $month, $day) = explode('-', $row['ondate']);
 ?>
+
 <form class="tab" action="./api/movie_save.php" method="post" enctype="multipart/form-data">
     <table width=100% class="clo">
         <tr>

@@ -85,8 +85,8 @@ class DB{
         return $this -> pdo -> exec($sql);
     }
 
-    function count($where = []){
-        return $this -> math("count", "*", $where);
+    function count($where = [], $arg = ''){
+        return $this -> math("count", "*", $where, $arg);
     }
     function sum($col, $where = []){
         return $this -> math("sum", $col, $where);
@@ -101,7 +101,7 @@ class DB{
         return $this -> math("min", $col, $where);
     }
 
-    protected function math($math, $col = "*", $where = []){
+    protected function math($math, $col = "*", $where = [], $arg = ''){
         $sql = "Select $math($col) From `{$this -> table}` ";
 
         if(!empty($where)){
@@ -110,6 +110,10 @@ class DB{
             $sql .= " Where " . join(" && ", $tmp);
         }
 
+        if(!empty($arg)){
+            $sql .= $arg;
+        }
+        // echo $sql;
         return $this -> pdo -> query($sql) -> fetchColumn();
     }
 

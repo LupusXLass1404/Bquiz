@@ -1,4 +1,11 @@
-<?php include "./api/db.php"; ?>
+<?php include "./api/db.php"; 
+
+if(!isset($_SESSION['admin'])){
+    to("./index.php?do=login");
+}
+
+?>
+
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0055)?do=admin -->
@@ -21,7 +28,7 @@
             <a href="./index.php">首頁</a>
             <a href="./index.php?do=order">線上訂票</a>
             <a href="#">會員系統</a>
-            <a href="./admin.php">管理系統</a>
+            <a href="./index.php?do=login">管理系統</a>
         </div>
         <div id="text"> <span class="ct">最新活動</span>
             <marquee direction="right">

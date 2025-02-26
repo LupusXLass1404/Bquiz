@@ -21,7 +21,7 @@
             <a href="./index.php">首頁</a>
             <a href="./index.php?do=order">線上訂票</a>
             <a href="#">會員系統</a>
-            <a href="./admin.php">管理系統</a>
+            <a href="./index.php?do=login">管理系統</a>
         </div>
         <div id="text"> <span class="ct">最新活動</span>
             <marquee direction="right">

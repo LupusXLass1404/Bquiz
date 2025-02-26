@@ -59,6 +59,10 @@ input:focus {
 	margin: 30px auto 10px auto;
 }
 
+.aut {
+	margin: auto;
+}
+
 #top {
 	display: block;
 	height: 100px;
