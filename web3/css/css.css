@@ -217,3 +217,21 @@ h1 {
 .wx::selection {
 	cursor: default;
 }
+
+.seats {
+	display: flex;
+	flex-wrap: wrap;
+	width: 40%;
+	position: relative;
+	background-image: url(../icon/03D04.png);
+	background-size: 150% 96%;
+	background-repeat: no-repeat;
+	background-position: 50% 2px;
+	padding: 24px;
+}
+
+.seat {
+	width: 64px;
+	height: 84px;
+	padding-bottom: 3px;
+}

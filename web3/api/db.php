@@ -153,5 +153,6 @@ function to($url){
 
 $Trailer = new DB("trailer");
 $Movie = new DB("movie");
+$Ticket = new DB("ticket");
 
 ?>

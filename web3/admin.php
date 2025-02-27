@@ -41,7 +41,7 @@ if(!isset($_SESSION['admin'])){
                 <a href="?do=go">動態文字管理</a>|
                 <a href="?do=trailer">預告片海報管理</a>|
                 <a href="?do=movie">院線片管理</a>|
-                <a href="?do=order">電影訂票管理</a>
+                <a href="?do=ticket">電影訂票管理</a>
             </div>
             <?php
                 $do = $_GET['do']??"main";
