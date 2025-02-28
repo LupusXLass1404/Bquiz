@@ -49,8 +49,20 @@
 }
 
 #posters{
-	height: 312px;
+	height: 260px;
+
+	position: relative;
+
+
 }
+
+.poster{
+	position: absolute;
+	height:100%;
+	top:0;
+	display: none;
+}
+
 #box {
 	display: flex;
 	justify-content: space-between;
@@ -58,6 +70,7 @@
 
 }
 #items {
+	margin-top: 32px;
 	display: flex;
 	width: 352px;
 	overflow: hidden;
