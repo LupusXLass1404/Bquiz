@@ -22,7 +22,6 @@ input[type='text'],input[type='file'],input[type='password'],textarea,.button
 }
 input[type='button'],input[type='submit'],input[type='reset'],button,.button
 {
-
 	background:#000;
 	color:#fff;
 	border:none;
