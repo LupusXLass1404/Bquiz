@@ -11,6 +11,8 @@
         <?php
             $rows = $$db->all(" Order by `rank`");
             foreach($rows as $idx => $row):
+                $prev = ($idx == 0) ? $row['id'] : $rows[$idx-1]['id'] ;
+                $next = ($idx + 1) == count($rows) ? $row['id'] : $rows[$idx+1]['id'];
         ?>
         <tr>
             <td><img src="./upload/<?=$row['img'];?>" width=80%></td>
@@ -38,6 +40,13 @@
         <input type="reset" value="重置">
     </div>
 </form>
+<script>
+    function rank(id, sw){
+        $.post('./api/sw.php?db=Poster', {id, sw}, function(){
+            location.reload();
+        })
+    }
+</script>
 <hr>
 <h2 class="ct">新增預告片海報</h2>
 <form action="./api/poster_add.php" method="post" enctype="multipart/form-data">

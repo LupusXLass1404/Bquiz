@@ -3,8 +3,10 @@
 <div style="overflow: auto; height: 420px;">
     <?php
         $rows = $$db->all(" Order by `rank`");
-        foreach($rows as $idx => $row):
 
+        foreach($rows as $idx => $row):
+            $prev = ($idx == 0) ? $row['id'] : $rows[$idx-1]['id'] ;
+            $next = ($idx + 1) == count($rows) ? $row['id'] : $rows[$idx+1]['id'];
     ?>
     <table class="ct" width=100% border=1>
         <tr>
@@ -42,7 +44,7 @@
 </div>
 <script>
     function rank(id, sw){
-        $.post('./api/sw.php', {id, sw}, function(){
+        $.post('./api/sw.php?db=Movie', {id, sw}, function(){
             location.reload();
         })
     }
