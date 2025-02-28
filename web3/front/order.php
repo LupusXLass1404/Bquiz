@@ -27,7 +27,7 @@
 </div>
 
 <div id="seat" class="tab ct clo" style="display: none">
-    
+
 </div>
 
 
@@ -35,7 +35,7 @@
     let data = {};
     let getId = '<?=$_GET['id']??'';?>';
     getMoive(getId);
-   
+
     $('#movie').on('change', function(){
         getDate($('#movie').val());
     })
@@ -48,12 +48,13 @@
             $('#movie').html(res);
             data['movie'] = $('#movie option:selected').text();
 
-            getDate(data['movie']);
+            getDate($('#movie').val());
         })
     }
 
     function getDate(movie){
         $.post('./api/get_date.php', {movie}, function(res){
+            console.log(res);
             $('#date').html(res);
             data['date'] = $('#date').val();
 
@@ -68,7 +69,7 @@
             data['schedule'] = $('#schedule').val();
         })
     }
-    
+
     function next(){
         $.post('./api/get_seat.php', data, function(res){
             $('#seat').html(res);

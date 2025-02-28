@@ -1,13 +1,13 @@
 <div class="tab">
     <p>
         快速刪除：
-        <input type="radio" name="del" value="date" id="date">依日期<input type="text" name="date" id="date">
+        <input type="radio" name="del" value="date">依日期<input type="text" name="date" id="date">
         <input type="radio" name="del" value="movie">依電影
         <select name="movie" id="movie">
-            <?php 
+            <?php
                 $rows = $$db -> all("GROUP BY `movie`");
                 dd($rows);
-                foreach($rows as $row): 
+                foreach($rows as $row):
             ?>
                 <option value="<?=$row['movie'];?>"><?=$row['movie'];?></option>
             <?php endforeach; ?>
@@ -16,16 +16,19 @@
     </p>
     <script>
         function qdel(){
+            console.log('123');
+
             let type = $('input[name="del"]:checked').val();
             let data = '';
             if(type){
                 if(type == "date") data = $('#date').val();
                 if(type == "movie") data = $('#movie').val();
-    
+
                 if(confirm(`確認要刪除「${data}」的所有訂單嗎？`)){
-                    $.post('./api/qdel.php', {type,data}, function(
+                    $.post('./api/qdel.php', {type, data}, function(res){
+                        console.log(res);
                         location.reload();
-                    ))
+                    })
                 }
             }
         }
