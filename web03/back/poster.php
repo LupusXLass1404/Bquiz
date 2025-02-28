@@ -1,8 +1,9 @@
 <h2 class="ct">預告片清單</h2>
 <form action="./api/poster_edit.php" method="post" enctype="multipart/data-form">
+    <div style="overflow: auto; height: 280px;">
     <table class="ct" width=100%>
         <tr>
-            <td class="clo" width=10%>預告片海報</td>
+            <td class="clo" width=15%>預告片海報</td>
             <td class="clo">預告片片名</td>
             <td class="clo">預告片排序</td>
             <td class="clo">操作</td>
@@ -12,13 +13,26 @@
             foreach($rows as $idx => $row):
         ?>
         <tr>
-            <td><img src="./upload/<?=$row['img'];?>" width=100%></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><img src="./upload/<?=$row['img'];?>" width=80%></td>
+            <td><input type="text" name="name[]" value="<?=$row['name'];?>"></td>
+            <td>
+                <input type="button" value="往上" onclick="rank(<?=$row['id'];?>, <?=$prev;?>)">
+                <input type="button" value="往下" onclick="rank(<?=$row['id'];?>, <?=$next;?>)">
+            </td>
+            <td>
+                <input type="checkbox" name="sh[]" value="<?=$row['id'];?>" <?=$row['sh']==1 ?'checked':'';?>>顯示
+                <input type="checkbox" name="del[]" value="<?=$row['id'];?>">刪除
+                <select name="ani[]">
+                    <option value="1" <?=$row['ani']==1 ?'selected':'';?>>淡入淡出</option>
+                    <option value="2" <?=$row['ani']==2 ?'selected':'';?>>滑入滑出</option>
+                    <option value="3" <?=$row['ani']==3 ?'selected':'';?>>放大縮小</option>
+                </select>
+            </td>
+            <input type="hidden" name="id[]" value="<?=$row['id'];?>">
         </tr>
         <?php endforeach; ?>
     </table>
+    </div>
     <div class="ct">
         <input type="submit" value="編輯確定">
         <input type="reset" value="重置">
