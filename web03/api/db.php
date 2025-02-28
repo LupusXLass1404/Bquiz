@@ -130,4 +130,9 @@ function dd($array){
 function to($url){
     header('location:'.$url);
 }
+
+$Poster = new DB('poster');
+$Movie = new DB('movie');
+$Ticket = new DB('ticket');
+
 ?>
