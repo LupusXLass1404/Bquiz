@@ -4,6 +4,7 @@
     <?php
         $rows = $$db->all(" Order by `rank`");
         foreach($rows as $idx => $row):
+
     ?>
     <table class="ct" width=100% border=1>
         <tr>
@@ -17,7 +18,7 @@
             <!-- <td></td> -->
             <!-- <td></td> -->
             <td>
-                <input type="button" value="隱藏" onclick="lof('./api/sh.php?do=movie&id=<?=$row['id'];?>')">
+                <input type="button" value="<?=$row['sh']==1?'隱藏':'顯示';?>" onclick="lof('./api/sh.php?do=movie&id=<?=$row['id'];?>')">
             </td>
             <td>
                 <input type="button" value="往上" onclick="rank(<?=$row['id'];?>, <?=$prev;?>)">
@@ -39,3 +40,10 @@
     <hr>
     <?php endforeach; ?>
 </div>
+<script>
+    function rank(id, sw){
+        $.post('./api/sw.php', {id, sw}, function(){
+            location.reload();
+        })
+    }
+</script>
