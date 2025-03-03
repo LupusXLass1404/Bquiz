@@ -95,11 +95,39 @@
 <div class="half">
     <h1>院線片清單</h1>
     <div class="rb tab" style="width:95%;">
-        <table>
-            <tbody>
-                <tr> </tr>
-            </tbody>
-        </table>
-        <div class="ct"> </div>
+        <?php
+            $item = 4;
+            $page = $_GET['page']??1;
+            $start = ($page - 1) * $item;
+            $today = date("Y-m-d");
+            $ondate = date("Y-m-d", strtotime("$today -2 days"));
+            $rows = $Movie -> all(['sh'=>1], " AND `ondate` BETWEEN '$ondate' AND '$today' Order by `rank` Limit $start, $item")
+        ?>
+        <div class="movies">
+            <?php foreach($rows as $row): ?>
+                <table class="movie">
+                    <tr>
+                        <td width=30%><img src="./upload/<?=$row['poster'];?>" width=90% onclick="lof('?do=intro&id=<?=$row['id'];?>')"></td>
+                        <td>
+                            片名：<?=$row['name'];?><br>
+                            分級：<img src="./icon/03C0<?=$row['rating'];?>.png" width=24px><?=DB::$rating[$row['rating']];?><br>
+                            上映日期：<br><?=$row['ondate'];?><br>
+                            <input type="button" value="劇情簡介" onclick="lof('?do=intro&id=<?=$row['id'];?>')">
+                            <input type="button" value="線上訂票" onclick="lof('?do=ticket&id=<?=$row['id'];?>')">
+                            
+                        </td>
+                    </tr>
+                </table>
+            <?php endforeach;?>
+        </div>
+        <div class="ct a"> 
+            <?php
+                $count = $Movie -> count(['sh'=>1], " AND `ondate` BETWEEN '$ondate' AND '$today'");
+                $end = ceil($count / $item);
+                for($i=1; $i <= $end; $i++){
+                    echo " <a href='?page=$i'>$i</a> ";
+                }
+            ?>
+        </div>
     </div>
 </div>
