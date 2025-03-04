@@ -19,18 +19,34 @@
 
 <script>
     let getId = <?=$_GET['id']??0;?>;
+    let data = {};
     getMovie(getId)
+
+    $('#movie').on('change', function(){
+        getDate();
+    })
+
     function getMovie(id){
         $.post('./api/get_movie.php', {id}, function(res){
-            console.log(res);
+            // console.log(res);
             
             $('#movie').html(res);
+            getDate();
         })
     }
     function getDate(){
-
+        data.movie = $('#movie').val();
+        
+        $.post('./api/get_date.php', {data}, function(res){
+            console.log(res);
+            
+            $('#date').html(res);
+            // getSession();
+        })
     }
     function getSession(){
+        data.movie = $('#date').val();
+
 
     }
 
