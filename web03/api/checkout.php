@@ -12,6 +12,7 @@ $_POST['no'] = date('Ymd') . sprintf("%04d", $Ticket->max('id')+1);
     <?=floor($i/5)+1;?>排<?=$i%5+1;?>號<br>
 <?php endforeach;?>
 <?php
+    $_POST['qt'] = count($_POST['seat']);
     $_POST['seat'] = serialize($_POST['seat']);
     $Ticket -> save($_POST);
 ?>
