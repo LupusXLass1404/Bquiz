@@ -12,7 +12,7 @@ $sess = [
 
 
 $now = date("G") - 13;
-$t = ($_POST['data']['date'] == $today && $now > 0) ? ceil($now/2) : 0;
+$t = ($_POST['date'] == $today && $now > 0) ? ceil($now/2) : 0;
 
 for($i = $t; $i < 5; $i++){
     echo "<option value='$sess[$i]'>";
@@ -20,5 +20,4 @@ for($i = $t; $i < 5; $i++){
     echo " 剩餘座位：";
     echo "</option>";
 }
-// 14
 ?>

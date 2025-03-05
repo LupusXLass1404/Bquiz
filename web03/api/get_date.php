@@ -1,6 +1,6 @@
 <?php include_once './db.php';
 $today = date("Y-m-d");
-$row = $Movie -> find($_POST['data']['movie']);
+$row = $Movie -> find($_POST['movie']);
 
 for($i=0; $i < 3; $i++){
     $ondate = date("Y-m-d", strtotime("{$row['ondate']} +{$i} days"));
