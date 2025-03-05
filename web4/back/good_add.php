@@ -1,0 +1,1 @@
+table>tr*9>td.tt.ct+td.pp

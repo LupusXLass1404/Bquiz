@@ -1,3 +1,4 @@
+<?php include_once './api/db.php';?>
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0057)?do=admin -->
@@ -22,7 +23,7 @@
 			<img src="./icon/0417.jpg">
 		</div>
 		<div id="left" class="ct">
-			<div style="min-height:400px;">
+			<div style="min-height:300px;">
 				<a href="?do=admin">管理權限設置</a>
 				<a href="?do=th">商品分類與管理</a>
 				<a href="?do=order">訂單管理</a>
@@ -32,7 +33,16 @@
 				<a href="?do=logout" style="color:#f00;">登出</a>
 			</div>
 		</div>
-		<div id="right">
+		<div id="right" style="height:300px; overflow:auto;">
+			<?php 
+                $do = $_GET['do']??'main';
+                $file = "./back/$do.php";
+
+                if(!file_exists($file)) $do = 'main';
+                $db = ucfirst($do);
+
+                include "./back/$do.php";
+            ?>
 		</div>
 		<div id="bottom" style="line-height:70px; color:#FFF; background:url(icon/bot.png);" class="ct">
 			頁尾版權 : </div>

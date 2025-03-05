@@ -26,7 +26,7 @@ class DB{
         if(!empty($arg[1])){
             $sql .= $arg[1];
         }
-        echo $sql;
+        // echo $sql;
         return $this->fetch_all($sql);
     }
 
@@ -38,7 +38,7 @@ class DB{
         } else {
             $sql .= " Where `id`='$id'";
         }
-        echo $sql;
+        // echo $sql;
         return $this->fetch_one($sql);
     }
 
@@ -116,5 +116,5 @@ function to($url){
     header('location:'.$url);
 }
 
-$Test = new DB('test');
+$Class = new DB('class');
 ?>

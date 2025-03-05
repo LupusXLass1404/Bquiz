@@ -1,3 +1,4 @@
+<?php include_once './api/db.php';?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
@@ -38,7 +39,7 @@
                 <div style="color:#f00; font-size:28px;">00005</div>
             </span>
         </div>
-        <div id="right">
+        <div id="right" style="min-height:400px;">
             <?php 
                 $do = $_GET['do']??'main';
                 $file = "./front/$do.php";
