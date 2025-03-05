@@ -6,7 +6,12 @@
 
     <input type="radio" name="type" value="name">
     依電影
-    <select name="movie" id="movie"></select>
+    <select name="name" id="name">
+    <?php foreach($$db->all('Group by `name`') as $row): ?>
+        <option value="<?=$row['name'];?>"><?=$row['name'];?></option>
+    <?php endforeach; ?>
+    </select>
+    <input type="button" value="刪除" onclick="qdel()">
 </p>
 <div style="">
     <table class="ct" width=100%>
@@ -31,14 +36,21 @@
                     <?=floor($i/5)+1;?>排<?=$i%5+1;?>號<br>
                 <?php endforeach;?>
                 </td>
-                <td><input type="button" value="刪除電影" onclick="lof('./api/del.php?do=ticket&id=<?=$row['id'];?>')"></td>
+                <td><input type="button" value="刪除" onclick="lof('./api/del.php?do=ticket&id=<?=$row['id'];?>')"></td>
             </tr>
         <?php endforeach; ?>
     </table>
 </div>
 
 <script>
-
-
-    confirm('確定要刪除符合條件的訂單嗎？')
+    function qdel(){
+        let type = $('input[name="type"]:checked').val();
+        let data = $('#'+type).val();
+        
+        if(confirm('確定要刪除符合條件的訂單嗎？')){
+            $.post('./api/qdel.php',{type, data}, function(){
+                location.reload();
+            })
+        }
+    }
 </script>
