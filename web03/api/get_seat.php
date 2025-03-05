@@ -11,7 +11,7 @@
 <?php endfor;?>
 
 <div>
-    您選擇的電影是：<?=$_POST['name'];?><br>
+    您選擇的電影是：<?=$_POST['movie'];?><br>
     您選擇的時刻是：<?=$_POST['date'];?> <?=$_POST['session'];?><br>
     已經勾選X張票，最多可以購買4張票<br>
 </div>
@@ -38,7 +38,7 @@
         data.seat = seat;
 
         $.post('./api/checkout.php', data, function(res){
-            $('$mm').html(res);
+            $('#mm').html(res);
         })
     }
 </script>

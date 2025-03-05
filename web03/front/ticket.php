@@ -61,7 +61,7 @@
         data.date = $('#date').val();
         
         $.post('./api/get_session.php', data, function(res){
-            console.log(res);
+            // console.log(res);
             
             $('#session').html(res);
         })
