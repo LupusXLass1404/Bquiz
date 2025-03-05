@@ -25,6 +25,9 @@
     $('#movie').on('change', function(){
         getDate();
     })
+    $('#date').on('change', function(){
+        getSession();
+    })
 
     function getMovie(id){
         $.post('./api/get_movie.php', {id}, function(res){
@@ -38,16 +41,21 @@
         data.movie = $('#movie').val();
         
         $.post('./api/get_date.php', {data}, function(res){
-            console.log(res);
+            // console.log(res);
             
             $('#date').html(res);
-            // getSession();
+            getSession();
         })
     }
     function getSession(){
-        data.movie = $('#date').val();
-
-
+        data.date = $('#date').val();
+        
+        $.post('./api/get_session.php', {data}, function(res){
+            console.log(res);
+            
+            $('#session').html(res);
+            // getSession();
+        })
     }
 
 </script>
