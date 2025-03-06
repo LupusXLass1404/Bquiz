@@ -33,13 +33,24 @@
         </div>
         <div id="left" class="ct">
             <div style="min-height:400px;">
+                <a href="?type=0">全部商品(<?=$Good->count(['sh'=>1]);?>)</a>
+                <?php foreach($Class->all(['main_id'=>0]) as $row): ?>
+                    <div class="ww">
+                        <a href="?type=<?=$row['id'];?>"><?=$row['text'];?>(<?=$Good->count(['sh'=>1,'main'=>$row['id']]);?>)</a>
+                        <div class="s">
+                            <?php foreach($Class->all(['main_id'=>$row['id']]) as $row): ?>
+                                <a href="?type=<?=$row['id'];?>" style="background-color:#CCC"><?=$row['text'];?>(<?=$Good->count(['sh'=>1,'sub'=>$row['id']]);?>)</a>
+                            <?php endforeach;?>
+                        </div>
+                    </div>
+                <?php endforeach;?>
             </div>
             <span>
                 <div>進站總人數</div>
                 <div style="color:#f00; font-size:28px;">00005</div>
             </span>
         </div>
-        <div id="right" style="min-height:400px;">
+        <div id="right" style="height:300px; overflow:auto;">
             <?php 
                 $do = $_GET['do']??'main';
                 $file = "./front/$do.php";

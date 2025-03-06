@@ -1,3 +1,4 @@
+<a href="?do=th">商品分類</a>／<a href="?do=good">商品管理</a>
 <h1>商品分類</h1>
 <form action="./api/class.php" method="post">
     新增大分類：<input type="text" name="text"><input type="submit" value="新增">
@@ -31,6 +32,3 @@
         <input type="reset" value="重置">
     </div>
 </form>
-
-<h1>商品管理</h1>
-<input type="button" value="新增商品" onclick="lof('?do=good_add')">

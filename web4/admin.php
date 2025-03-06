@@ -17,10 +17,10 @@
 	<iframe name="back" style="display:none;"></iframe>
 	<div id="main">
 		<div id="top">
-			<a href="?">
-				<img src="./icon/0416.jpg">
+			<a href="./index.php">
+				<img src="./icon/0416.jpg" width=45%>
 			</a>
-			<img src="./icon/0417.jpg">
+			<img src="./icon/0417.jpg" width=20%>
 		</div>
 		<div id="left" class="ct">
 			<div style="min-height:300px;">

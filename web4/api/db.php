@@ -117,4 +117,6 @@ function to($url){
 }
 
 $Class = new DB('class');
+$Good = new DB('good');
+$Mem = new DB('mem');
 ?>
