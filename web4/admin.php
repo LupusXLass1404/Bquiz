@@ -25,16 +25,20 @@
 		<div id="left" class="ct">
 			<div style="min-height:300px;">
 				<a href="?do=admin">管理權限設置</a>
-				<a href="?do=th">商品分類與管理</a>
-				<a href="?do=order">訂單管理</a>
-				<a href="?do=mem">會員管理</a>
-				<a href="?do=bot">頁尾版權管理</a>
-				<a href="?do=news">最新消息管理</a>
-				<a href="?do=logout" style="color:#f00;">登出</a>
+				<?php
+				$row=$Admin->find(['acc'=>$_SESSION['admin']]);
+				$per=unserialize($row['per']);
+				?>
+				<?php if(in_array(1,$per)) echo "<a href='?do=th'>商品分類與管理</a>";?>
+				<?php if(in_array(2,$per)) echo "<a href='?do=order'>訂單管理</a>";?>
+				<?php if(in_array(3,$per)) echo "<a href='?do=mem'>會員管理</a>";?>
+				<?php if(in_array(4,$per)) echo "<a href='?do=bot'>頁尾版權管理</a>";?>
+				<?php if(in_array(5,$per)) echo "<a href='?do=news'>最新消息管理</a>";?>
+				<a href="./api/logout.php?do=admin" style="color:#f00;">登出</a>
 			</div>
 		</div>
 		<div id="right" style="height:300px; overflow:auto;">
-			<?php 
+			<?php
                 $do = $_GET['do']??'main';
                 $file = "./back/$do.php";
 
@@ -45,7 +49,7 @@
             ?>
 		</div>
 		<div id="bottom" style="line-height:70px; color:#FFF; background:url(icon/bot.png);" class="ct">
-			頁尾版權 : </div>
+			<?=$Bot->find(1)['text'];?> </div>
 	</div>
 
 </body>
