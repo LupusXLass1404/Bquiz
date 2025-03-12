@@ -9,15 +9,17 @@
                 <td>操作</td>
             </tr>
             <?php
-                $rows=$$db->all();
+                $rows=$$db->all(" Order by `rank`");
                 foreach($rows as $idx=>$row):
+                    $prev = $idx==0 ? $row['id']: $rows[$idx-1]['id'];
+                    $next = $idx>=count($rows)-1 ? $row['id'] : $rows[$idx+1]['id'];
             ?>
             <tr>
                 <td><img src="./upload/<?=$row['poster'];?>" alt="" width=90%></td>
                 <td><input type="text" name="name[]" value="<?=$row['name'];?>"></td>
                 <td>
-                    <input type="button" value="往上">
-                    <input type="button" value="往下">
+                    <input type="button" value="往上" onclick="sw(<?=$row['id'];?>,<?=$prev?>)">
+                    <input type="button" value="往下" onclick="sw(<?=$row['id'];?>,<?=$next;?>)">
                 </td>
                 <td>
                     <input type="checkbox" name="sh[]" value="<?=$row['id'];?>" <?=$row['sh']==1?'checked':'';?>>顯示
@@ -53,3 +55,13 @@
     </p>
     <p>&nbsp</p>
 </form>
+
+<script>
+    function sw(id,sw){
+        $.post("./api/sw.php?do=poster",{id,sw},function(res){
+            // console.log(res);
+            
+            location.reload();
+        })
+    }
+</script>
