@@ -107,8 +107,13 @@ function to($url){
     header("location:".$url);
 }
 
-$Test= new DB('test');
-
-
+$Poster= new DB('poster');
+$Movie= new DB('movie');
+$Order= new DB('orders');
 
 ?>
+
+<!-- <p class="ct">
+    <input type="submit" value="">
+    <input type="reset" value="重置">
+</p> -->

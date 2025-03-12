@@ -151,6 +151,7 @@ input:focus {
 .clo {
 	background: #E0E0E0;
 	padding: 10px 3px 10px 3px;
+	color: #333;
 }
 
 .clo td {
