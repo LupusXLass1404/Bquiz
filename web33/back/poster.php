@@ -59,8 +59,6 @@
 <script>
     function sw(id,sw){
         $.post("./api/sw.php?do=poster",{id,sw},function(res){
-            // console.log(res);
-            
             location.reload();
         })
     }
