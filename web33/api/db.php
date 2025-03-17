@@ -6,6 +6,12 @@ class DB{
     protected $dbn="mysql:host=localhost;charset=utf8;dbname=db33";
     protected $pdo;
     protected $table;
+    public static $rating = [
+        '1'=> '普遍級',
+        '2'=> '保護級',
+        '3'=> '輔導級',
+        '4'=> '限制級',
+    ];
 
     function __construct ($table){
         $this->pdo = new PDO($this->dbn,'root','');
@@ -25,6 +31,7 @@ class DB{
         if(!empty($arg[1])){
             $sql.=$arg[1];
         }
+        // echo $sql;
         return $this->fetch_all($sql);
     }
     function find($id){
@@ -81,7 +88,7 @@ class DB{
         if(!empty($arg)){
             $sql.=$arg;
         }
-
+        // echo $sql;
         return $this->pdo->query($sql)->fetchColumn();
     }
     protected function fetch_one($sql){
@@ -113,7 +120,3 @@ $Order= new DB('orders');
 
 ?>
 
-<!-- <p class="ct">
-    <input type="submit" value="">
-    <input type="reset" value="重置">
-</p> -->
